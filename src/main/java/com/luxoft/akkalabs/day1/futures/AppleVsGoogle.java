@@ -2,6 +2,7 @@ package com.luxoft.akkalabs.day1.futures;
 
 import akka.actor.ActorSystem;
 import akka.dispatch.Futures;
+import akka.dispatch.OnSuccess;
 import scala.concurrent.Future;
 
 import java.util.Arrays;
@@ -27,9 +28,14 @@ public class AppleVsGoogle {
         List<Future<FinalResult>> allResults = Arrays.asList(futureAppleResult, futureGoogleResult);
         Future<Iterable<FinalResult>> result = Futures.sequence(allResults, actorSystem.dispatcher());
 
-        //System.out.println("Apple: ");
-        //appleResult.getTweets().stream().forEach(tweet -> System.out.print(tweet.getLanguage() + " "));
-        //System.out.println("\nGoogle: ");
-        //googleResult.getTweets().stream().forEach(tweet -> System.out.print(tweet.getLanguage() + " "));
+        result.onSuccess(new OnSuccess<Iterable<FinalResult>>() {
+            @Override
+            public void onSuccess(Iterable<FinalResult> success) throws Throwable {
+                for (FinalResult finalResult : success) {
+                    System.out.println("Result for " + finalResult.getKeyword() + " is " + finalResult);
+                }
+            }
+        }, actorSystem.dispatcher());
+
     }
 }
