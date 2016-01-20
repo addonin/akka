@@ -32,8 +32,9 @@ public class AppleVsGoogle {
             @Override
             public void onSuccess(Iterable<FinalResult> success) throws Throwable {
                 for (FinalResult finalResult : success) {
-                    System.out.println("Result for " + finalResult.getKeyword() + " is " + finalResult);
+                    System.out.println("Result for " + finalResult.getKeyword() + " is " + finalResult.getLanguages());
                 }
+                actorSystem.shutdown();
             }
         }, actorSystem.dispatcher());
 
