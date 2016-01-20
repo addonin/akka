@@ -20,7 +20,7 @@ public class LanguagesCounterActor extends UntypedActor {
             for (Map.Entry<String, Integer> e : result.getLanguages().entrySet()) {
                 String key = e.getKey();
                 Integer counter = languages.get(key);
-                counter = (counter == null) ? 0 : e.getValue();
+                counter = (counter == null) ? 1 : e.getValue();
                 languages.put(key, counter);
             }
         } else if ("get".equals(message)) {
