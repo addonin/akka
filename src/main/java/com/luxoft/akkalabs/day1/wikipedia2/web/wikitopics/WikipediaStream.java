@@ -33,8 +33,8 @@ public class WikipediaStream extends HttpServlet {
         asyncContext.setTimeout(240000);
 
         WikipediaListenerImpl wikipediaListener = new WikipediaListenerImpl(streamId, asyncContext);
-        ActorSystem actroSystem = (ActorSystem) req.getServletContext().getAttribute("actroSystem");
-        ActorSelection actorSelection = actroSystem.actorSelection("/user/connections");
+        ActorSystem actorSystem = (ActorSystem) req.getServletContext().getAttribute("actorSystem");
+        ActorSelection actorSelection = actorSystem.actorSelection("/user/connections");
 
         Register register = new Register(wikipediaListener);
         actorSelection.tell(register, null);

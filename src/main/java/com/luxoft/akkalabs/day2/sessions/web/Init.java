@@ -1,6 +1,11 @@
 package com.luxoft.akkalabs.day2.sessions.web;
 
 import akka.actor.ActorSystem;
+import akka.actor.Props;
+import com.luxoft.akkalabs.day2.sessions.actors.SessionsHubActor;
+import com.luxoft.akkalabs.day2.sessions.session.EchoSessionProcessor;
+import com.luxoft.akkalabs.day2.sessions.websocket.WebSocketLauncher;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -14,10 +19,11 @@ public class Init implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        ServletContext servletContext = sce.getServletContext();
         ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
-        sce.getServletContext().setAttribute(ACTOR_SYSTEM_KEY, system);
-
-        //...
+        servletContext.setAttribute(ACTOR_SYSTEM_KEY, system);
+        system.actorOf(Props.create(SessionsHubActor.class, EchoSessionProcessor.class), "sessions");
+        WebSocketLauncher.launchSessionEndpoint(servletContext, "/day2/echo", ACTOR_SYSTEM_KEY);
     }
 
     @Override
