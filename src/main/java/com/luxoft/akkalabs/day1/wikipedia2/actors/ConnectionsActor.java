@@ -4,7 +4,7 @@ import akka.actor.UntypedActor;
 import com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics.Deliver;
 import com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics.Register;
 import com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics.Unregister;
-import com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics.WikipediaListener;
+import com.luxoft.akkalabs.day1.wikipedia2.web.listeners.WikipediaListener;
 
 import java.util.HashMap;
 import java.util.Map;

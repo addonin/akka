@@ -1,8 +1,6 @@
 package com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics;
 
 import javax.servlet.AsyncContext;
-import javax.servlet.AsyncEvent;
-import javax.servlet.AsyncListener;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,29 +24,6 @@ public class WikipediaStream extends HttpServlet {
 
         AsyncContext asyncContext = req.startAsync();
         asyncContext.setTimeout(240000);
-    }
-
-    private class AsyncListenerImpl implements AsyncListener {
-
-        @Override
-        public void onComplete(AsyncEvent asyncEvent) throws IOException {
-
-        }
-
-        @Override
-        public void onTimeout(AsyncEvent asyncEvent) throws IOException {
-
-        }
-
-        @Override
-        public void onError(AsyncEvent asyncEvent) throws IOException {
-
-        }
-
-        @Override
-        public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
-
-        }
     }
 
 }

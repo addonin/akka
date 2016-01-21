@@ -1,6 +1,7 @@
-package com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics;
+package com.luxoft.akkalabs.day1.wikipedia2.web.listeners;
 
 import com.luxoft.akkalabs.clients.wikipedia.WikipediaPage;
+import com.luxoft.akkalabs.day1.wikipedia2.web.wikitopics.NotDeliveredException;
 
 public interface WikipediaListener {
 
