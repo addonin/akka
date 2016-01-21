@@ -21,8 +21,6 @@ public class AsyncListenerImpl implements AsyncListener {
         this.actorSelection = actorSelection;
     }
 
-
-
     @Override
     public void onComplete(AsyncEvent asyncEvent) throws IOException {
         unregister(actorSelection);
