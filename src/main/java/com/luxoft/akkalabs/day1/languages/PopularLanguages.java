@@ -26,7 +26,7 @@ public class PopularLanguages {
         List<String> keywords = Arrays.asList("Google", "Apple", "Android", "iPhone", "Lady Gaga");
 
         for (String keyword : keywords) {
-            Futures.future(new CollectTweets(30, actorSystem, keyword), actorSystem.dispatcher())
+            Futures.future(new CollectTweets(actorSystem, keyword), actorSystem.dispatcher())
                     .map(new FinalResultCalculator(), actorSystem.dispatcher())
                             .onSuccess(new SendToActor(actorRef), actorSystem.dispatcher());
         }

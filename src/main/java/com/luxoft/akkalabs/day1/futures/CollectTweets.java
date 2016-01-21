@@ -5,8 +5,7 @@ import com.luxoft.akkalabs.clients.twitter.QueueTwitterClient;
 import com.luxoft.akkalabs.clients.twitter.TweetObject;
 import com.luxoft.akkalabs.clients.twitter.TwitterClients;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 /**
@@ -15,12 +14,10 @@ import java.util.concurrent.Callable;
  */
 public class CollectTweets implements Callable<Result> {
 
-    private int tweetsAmount;
     private ActorSystem actorSystem;
     private String keyword;
 
-    public CollectTweets(int tweetsAmount, ActorSystem actorSystem, String keyword) {
-        this.tweetsAmount = tweetsAmount;
+    public CollectTweets(ActorSystem actorSystem, String keyword) {
         this.actorSystem = actorSystem;
         this.keyword = keyword;
     }
@@ -28,8 +25,8 @@ public class CollectTweets implements Callable<Result> {
     @Override
     public Result call() throws Exception {
         QueueTwitterClient queueTwitterClient = TwitterClients.start(actorSystem, keyword);
-        List<TweetObject> results = new LinkedList<>();
-        for (int i = 0; i < tweetsAmount; i++) {
+        ArrayList<TweetObject> results = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
             results.add(queueTwitterClient.next());
         }
         queueTwitterClient.stop();

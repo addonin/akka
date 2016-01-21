@@ -14,8 +14,8 @@ public class AppleVsGoogle {
 
         ActorSystem actorSystem = ActorSystem.create("AppleVsGoogle");
 
-        CollectTweets apple = new CollectTweets(10, actorSystem, "Apple");
-        CollectTweets google = new CollectTweets(10, actorSystem, "Google");
+        CollectTweets apple = new CollectTweets(actorSystem, "Apple");
+        CollectTweets google = new CollectTweets(actorSystem, "Google");
 
         Future<FinalResult> futureAppleResult =
                 Futures.future(apple, actorSystem.dispatcher())
